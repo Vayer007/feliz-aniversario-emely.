@@ -1,134 +1,233 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Feliz Aniversário, Emely!</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }.centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 1;
+    }
 
-<div class="centered">
-    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
-    <p>Que seu dia seja tão incrível quanto você!</p>
-    <button onclick="tocarMusica()">🎵 Clique para a surpresa 🎵</button>
-</div>
+    h1 {
+        font-size: 2.5em;
+        color: #ff69b4;
+    }
 
-<canvas id="particles"></canvas>
+    p {
+        font-size: 1.2em;
+        color: #fff;
+    }
 
-<audio id="musicaParabens" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: none;
+        border-radius: 10px;
+        background-color: #ff69b4;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-<script src="particles.js"></script>
-<script>
-function tocarMusica() {
-    const audio = document.getElementById("musicaParabens");
-    audio.play();
-}
-</script>
+    button:hover {
+        background-color: #ff85c1;
+    }
 
-</body>
-</html>
-
-<style>
-body {
-    margin: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 1;
-}
-
-h1 {
-    font-size: 2.5em;
-    color: #ff69b4;
-}
-
-p {
-    font-size: 1.2em;
-    color: #fff;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 10px;
-    background-color: #ff69b4;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #ff85c1;
-}
-
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-}
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 </style>
 
+</head>
+<body><div class="centered">
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+    <p>Que seu dia seja tão incrível quanto você!</p>
+    <button id="surpresaBtn">🎵 Clique para ouvir a música 🎵</button>
+</div><canvas id="particles"></canvas> <audio id="musicaParabens" src="https://www.dropbox.com/scl/fi/7nmop90tdnkwt6zpqhi4n/parabens-galinha-pintadinha.mp3?rlkey=ccztgq7so3r4n4o3ke8qcz0iy&dl=1"></audio>
+
 <script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-let particlesArray = [];
+    let particlesArray = [];
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.02;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255,215,0,0.8)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.size > 0.2) this.size -= 0.02;
-    }
-    draw() {
-        ctx.fillStyle = 'rgba(255,105,180,0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
 
-function init() {
-    particlesArray = [];
-    for (let i = 0; i < 200; i++) {
-        particlesArray.push(new Particle());
+    function init() {
+        particlesArray = [];
+        for (let i = 0; i < 200; i++) {
+            particlesArray.push(new Particle());
+        }
     }
-}
 
-function animate() {
-    ctx.fillStyle = 'rgba(0,0,0,0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
+    function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animate);
     }
-    requestAnimationFrame(animate);
-}
 
-init();
-animate();
-</script>
+    init();
+    animate();
 
+    document.getElementById('surpresaBtn').addEventListener('click', () => {
+        const audio = document.getElementById("musicaParabens");
+        audio.play();
+    });
+</script></body>
+</html><!DOCTYPE html><html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversário, Emely!</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }.centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 1;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        color: #ff69b4;
+    }
+
+    p {
+        font-size: 1.2em;
+        color: #fff;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: none;
+        border-radius: 10px;
+        background-color: #ff69b4;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #ff85c1;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+</style>
+
+</head>
+<body><div class="centered">
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+    <p>Que seu dia seja tão incrível quanto você!</p>
+    <button id="surpresaBtn">🎵 Clique para ouvir a música 🎵</button>
+</div><canvas id="particles"></canvas> <audio id="musicaParabens" src="https://www.dropbox.com/scl/fi/7nmop90tdnkwt6zpqhi4n/parabens-galinha-pintadinha.mp3?rlkey=ccztgq7so3r4n4o3ke8qcz0iy&dl=1"></audio>
+
+<script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.02;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255,215,0,0.8)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particlesArray = [];
+        for (let i = 0; i < 200; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    document.getElementById('surpresaBtn').addEventListener('click', () => {
+        const audio = document.getElementById("musicaParabens");
+        audio.play();
+    });
+</script></body>
+</html>
 
 
