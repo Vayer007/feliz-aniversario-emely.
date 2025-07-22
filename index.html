@@ -1,134 +1,131 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Feliz Aniversário, Emely!</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }.centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 1;
+    }
 
-<div class="centered">
-    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
-    <p>Que seu dia seja tão incrível quanto você!</p>
-    <button onclick="tocarMusica()">🎵 Clique para a surpresa 🎵</button>
-</div>
+    h1 {
+        font-size: 2.5em;
+        color: #ff69b4;
+    }
 
-<canvas id="particles"></canvas>
+    p {
+        font-size: 1.2em;
+        color: #fff;
+    }
 
-<audio id="musicaParabens" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: none;
+        border-radius: 10px;
+        background-color: #ff69b4;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-<script src="particles.js"></script>
-<script>
-function tocarMusica() {
-    const audio = document.getElementById("musicaParabens");
-    audio.play();
-}
-</script>
+    button:hover {
+        background-color: #ff85c1;
+    }
 
-</body>
-</html>
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
-<style>
-body {
-    margin: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
+    #videoContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
 
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 1;
-}
-
-h1 {
-    font-size: 2.5em;
-    color: #ff69b4;
-}
-
-p {
-    font-size: 1.2em;
-    color: #fff;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 10px;
-    background-color: #ff69b4;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #ff85c1;
-}
-
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-}
+    .hidden {
+        display: none;
+    }
 </style>
 
-<script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+</head>
+<body><div class="centered">
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+    <p>Que seu dia seja tão incrível quanto você!</p>
+    <button id="surpresaBtn">🎵 Clique para a surpresa 🎵</button>
+</div><canvas id="particles"></canvas>
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+<div id="videoContainer" class="hidden">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ei2-RjJDBHc?autoplay=1"
+        title="Parabéns da Galinha Pintadinha" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div><script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
 
-let particlesArray = [];
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
+    let particlesArray = [];
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.02;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255,105,180,0.7)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.size > 0.2) this.size -= 0.02;
+
+    function init() {
+        particlesArray = [];
+        for (let i = 0; i < 200; i++) {
+            particlesArray.push(new Particle());
+        }
     }
-    draw() {
-        ctx.fillStyle = 'rgba(255,105,180,0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+
+    function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animate);
     }
-}
 
-function init() {
-    particlesArray = [];
-    for (let i = 0; i < 200; i++) {
-        particlesArray.push(new Particle());
-    }
-}
+    init();
+    animate();
 
-function animate() {
-    ctx.fillStyle = 'rgba(0,0,0,0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-    }
-    requestAnimationFrame(animate);
-}
-
-init();
-animate();
-</script>
-
-
-
+    document.getElementById('surpresaBtn').addEventListener('click', () => {
+        document.getElementById('videoContainer').classList.remove('hidden');
+    });
+</script></body>
+</html>
