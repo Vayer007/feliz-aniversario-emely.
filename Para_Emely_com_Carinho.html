@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversário, Emely!</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #fce4ec, #f3e5f5);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            color: #4a148c;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        p {
+            max-width: 900px;
+            margin: 20px auto;
+            font-size: 1.15em;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+        button {
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ff4081;
+        }
+        @keyframes descer {
+            0% { transform: translateY(-50px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+
+    <p>
+hj é teu dia, e eu n podia deixar passar em branco, mesmo que a gente n se fale tanto, mesmo que o tempo tenha feito silêncio em alguns momentos, eu ainda lembro de vc, porque tem gente que passa e tem gente que fica, e vc é do tipo que fica, mesmo em silêncio, mesmo de longe
+
+vc é uma das melhores pessoas que já conheci, e isso n é exagero, é só verdade, daquelas verdades que o coração sente antes de qualquer coisa
+
+vc tem uma energia que muda tudo, um sorriso que muda o dia, uma presença que mesmo quieta, conforta, vc tem uma força que às vezes nem vc percebe, mas tá ali, firme, mesmo quando tudo parece bagunçado
+
+e nesse novo ciclo que começa, o que mais quero é que vc encontre paz, aquela paz que mora dentro, que n precisa de nada lá fora, só de coragem e silêncio, quero que vc se lembre que mesmo nos piores dias, vc ainda pode vencer, mesmo cansada, mesmo desanimada, mesmo com tudo contra
+
+porque vc já venceu muita coisa sem nem perceber, e ainda vai conquistar muito mais, porque vc tem luz, tem verdade, tem alma linda, e eu gosto disso em vc
+
+na real, eu gosto de vc de um jeito tranquilo, mas forte, aquele tipo de carinho que n precisa de explicação, que só existe, que fica, mesmo quando tudo muda
+
+vc é daquelas pessoas que a gente encontra e n esquece mais, que marca, que transforma, que inspira
+
+e por isso, hj eu n queria só te mandar parabéns, queria te mandar um lembrete
+
+vc é incrível, mesmo quando n se sente assim, vc merece o melhor, mesmo quando o mundo tenta te convencer do contrário, vc é capaz de superar tudo, mesmo quando estiver chorando baixinho, sozinha
+
+eu tô aqui, n importa o tempo, nem a distância, eu continuo torcendo por vc
+
+vc me faz bem, com a tua leveza, com teu jeito, com tua essência, e por isso, eu só desejo que esse novo ano te traga tudo aquilo que teu coração ainda sonha
+
+e se algum dia vc esquecer quem é, volta aqui, lê esse texto, e lembra de tudo que vc já foi, e de tudo que ainda vai ser
+
+vc n tá sozinha, e nem vai ficar, porque gente como vc atrai o que é verdadeiro, o que é bonito, o que é sincero
+
+feliz vida, emely, vc merece um mundo inteiro de amor, de leveza, de paz
+
+a tua existência deixa tudo mais bonito
+
+e eu gosto muito de vc, minha pessoa favorita ✨
+
+que neste aniversário vc comemore n só os teus anos, mas tudo que vc já enfrentou, tudo que já foi, tudo que sobreviveu em silêncio
+
+que vc olhe pra trás e veja o quanto cresceu, e pra frente com esperança de tudo que ainda vem
+
+que a vida te abrace como vc merece, com doçura, com verdade, com cuidado
+
+que vc tenha coragem pra ser quem é, mesmo nos dias em que n conseguir sorrir, mesmo quando tudo parecer difícil
+
+vc já provou que consegue, só por existir desse jeito bonito, inteiro, real
+
+e se em algum momento o mundo te fizer esquecer o quanto é especial, volta aqui, fecha os olhos, respira fundo, e lembra que alguém aqui acredita em vc
+
+eu tô aqui, torcendo, mesmo em silêncio, mesmo distante
+
+feliz novo ciclo, feliz tudo que vai nascer a partir de agora
+
+com carinho
+
+<strong>jediael</strong>
+    </p>
+
+    <button onclick="tocarMusica()">🎁 Clique Surpresa</button>
+
+    <audio id="musica" src="galinha-pintadinha.mp3"></audio>
+
+    <script>
+        function tocarMusica() {
+            const audio = document.getElementById("musica");
+            audio.play();
+            estourarPalmas();
+        }
+
+        function estourarPalmas() {
+            for (let i = 0; i < 20; i++) {
+                let confete = document.createElement("div");
+                confete.innerHTML = "👏";
+                confete.style.position = "fixed";
+                confete.style.left = Math.random() * 100 + "%";
+                confete.style.top = Math.random() * 100 + "%";
+                confete.style.fontSize = "2rem";
+                confete.style.opacity = "0.8";
+                confete.style.animation = "descer 2s ease-out forwards";
+                document.body.appendChild(confete);
+                setTimeout(() => confete.remove(), 2000);
+            }
+        }
+    </script>
+
+</body>
+</html>
