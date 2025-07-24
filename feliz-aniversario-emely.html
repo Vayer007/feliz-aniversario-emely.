@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversário, Emely!</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #fce4ec, #f3e5f5);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            color: #4a148c;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        p {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        button {
+            background-color: #ff80ab;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ff4081;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+
+    <p>
+    hj e teu dia, e eu n podia deixar passar em branco, mesmo que a gente n se fale tanto, mesmo que o tempo tenha feito silencio em alguns momentos, eu ainda lembro de vc, pq tem gente que passa e tem gente que fica, e vc e do tipo que fica, mesmo em silencio, mesmo de longe<br><br>
+
+    vc e uma das melhores pessoas que ja conheci, e isso n e exagero, e so verdade, daquelas verdades que o coraçao sente antes de qualquer coisa<br><br>
+
+    vc tem uma energia que muda tudo, um sorriso que muda o dia, uma presença que mesmo quieta, conforta, vc tem uma forca que as vezes nem vc percebe, mas ta la, firme, mesmo quando tudo parece bagunçado<br><br>
+
+    e nesse teu novo ciclo, o que mais quero e que vc encontre paz, aquela paz que mora dentro, que n precisa de nada la fora, so de silencio e coragem, quero que vc se lembre que mesmo nos piores dias, vc ainda pode vencer, mesmo cansada, mesmo desanimada, mesmo com tudo contra<br><br>
+
+    pq vc ja venceu muita coisa sem nem perceber, e ainda vai conquistar muito mais<br><br>
+
+    vc tem luz, tem verdade, tem alma linda, e eu adoro isso em vc<br><br>
+
+    na real, eu gosto de vc de um jeito tranquilo, mas forte, aquele tipo de carinho que n precisa de explicação, que ta aqui, que fica mesmo quando tudo muda<br><br>
+
+    vc e daquelas pessoas que a gente encontra e n esquece mais<br><br>
+
+    que marca<br>
+    que transforma<br>
+    que inspira<br><br>
+
+    e por isso, hj eu n queria te mandar só parabéns<br>
+    queria te mandar um lembrete<br><br>
+
+    vc e incrivel, mesmo quando n se sente assim<br>
+    vc merece o melhor, mesmo quando o mundo tenta te convencer do contrario<br>
+    vc e capaz de superar tudo, mesmo quando tiver chorando baixinho sozinha<br><br>
+
+    eu to aqui<br>
+    n importa o tempo<br>
+    nem a distancia<br>
+    eu continuo torcendo por vc<br><br>
+
+    vc me faz bem, com tua leveza, teu jeito, tua essência<br>
+    e por isso, eu so desejo que esse novo ano te traga tudo aquilo que teu coraçao ainda sonha<br><br>
+
+    e se algum dia vc esquecer quem vc e, volta aqui<br>
+    le esse texto<br>
+    e lembra de tudo que vc ja foi, e de tudo que ainda vai ser<br><br>
+
+    vc n ta sozinha<br>
+    nem vai ficar<br>
+    pq gente como vc atrai o que e verdadeiro<br><br>
+
+    feliz vida, emely<br>
+    vc merece um mundo inteiro de amor, leveza e paz<br><br>
+
+    <strong>a tua existencia deixa tudo mais bonito</strong><br><br>
+
+    gosto muito de vc, minha pessoa favorita ✨<br><br>
+
+    com carinho<br>
+    <strong>jediael</strong>
+    </p>
+
+    <button onclick="tocarMusica()">▶️ Ouvir Parabéns 🎶</button>
+
+    <audio id="musica" src="parabens-galinha.m4a"></audio>
+
+    <script>
+        function tocarMusica() {
+            const audio = document.getElementById("musica");
+            audio.play();
+            estourarPalmas();
+        }
+
+        function estourarPalmas() {
+            for (let i = 0; i < 20; i++) {
+                let confete = document.createElement("div");
+                confete.innerHTML = "👏";
+                confete.style.position = "fixed";
+                confete.style.left = Math.random() * 100 + "%";
+                confete.style.top = Math.random() * 100 + "%";
+                confete.style.fontSize = "2rem";
+                confete.style.opacity = "0.8";
+                confete.style.animation = "descer 2s ease-out forwards";
+                document.body.appendChild(confete);
+                setTimeout(() => confete.remove(), 2000);
+            }
+        }
+    </script>
+
+</body>
+</html>
