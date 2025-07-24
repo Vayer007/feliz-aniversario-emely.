@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversário, Emely!</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .centered {
+            text-align: center;
+            padding: 60px 20px 20px;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ff69b4;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff69b4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff85c1;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #videoContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .mensagem {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            font-size: 1.1em;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="centered">
+    <h1>🎉 Feliz Aniversário, Emely! 🎉</h1>
+    <p>Que seu dia seja tão incrível quanto você!</p>
+    <button id="surpresaBtn">🎵 Clique para a surpresa 🎵</button>
+</div>
+
+<div class="mensagem">
+hj é teu dia, e eu n podia deixar passar em branco, mesmo que a gente n se fale tanto, mesmo que o tempo tenha feito silêncio em alguns momentos, eu ainda lembro de vc, porque tem gente que passa e tem gente que fica, e vc é do tipo que fica, mesmo em silêncio, mesmo de longe
+
+vc é uma das melhores pessoas que já conheci, e isso n é exagero, é só verdade, daquelas verdades que o coração sente antes de qualquer coisa
+
+vc tem uma energia que muda tudo, um sorriso que muda o dia, uma presença que mesmo quieta, conforta, vc tem uma força que às vezes nem vc percebe, mas tá ali, firme, mesmo quando tudo parece bagunçado
+
+e nesse novo ciclo que começa, o que mais quero é que vc encontre paz, aquela paz que mora dentro, que n precisa de nada lá fora, só de coragem e silêncio, quero que vc se lembre que mesmo nos piores dias, vc ainda pode vencer, mesmo cansada, mesmo desanimada, mesmo com tudo contra
+
+quero que vc se lembre que mesmo nos piores dias, vc ainda pode vencer, mesmo cansada, mesmo desanimada, mesmo com tudo contra, você pode
+
+vc já venceu muita coisa sem nem perceber, e ainda vai conquistar muito mais, porque vc tem luz, tem verdade, tem alma linda, e eu gosto disso em vc
+
+na real, eu gosto de vc em qualquer fase ,nao importa, e sei que você tao forte quanto pensa, vc so precisar de tipo de carinho que n precisa de explicação, que só existe, que fica, mesmo quando tudo muda
+
+vc é daquelas pessoas que a gente encontra e n esquece mais, que marca, que transforma, que inspira
+
+e por isso, hj eu n queria só te mandar parabéns, queria te mandar um lembrete
+
+vc é incrível, mesmo quando n se sente assim, vc merece o melhor, mesmo quando o mundo tenta te convencer do contrário, vc é capaz de superar tudo, mesmo quando estiver chorando baixinho, sozinha
+
+eu tô aqui, n importa o tempo, nem a distância, eu continuo torcendo por vc
+
+vc me faz bem, com a tua leveza, com teu jeito, com tua essência, e por isso, eu só desejo que esse novo ano te traga tudo aquilo que teu coração ainda sonha
+
+e se algum dia vc esquecer quem é, volta aqui, lê esse texto, e lembra de tudo que vc já foi, e de tudo que ainda vai ser
+
+vc n tá sozinha, e nem vai ficar, porque gente como vc atrai o que é verdadeiro, o que é bonito, o que é sincero
+
+feliz vida, emely, vc merece um mundo inteiro de amor, de leveza, de paz
+
+a tua existência deixa tudo mais bonito
+
+e eu gosto muito de vc, minha pessoa favorita ✨
+
+que neste aniversário vc comemore n só os teus anos, mas tudo que vc já enfrentou, tudo que já foi, tudo que sobreviveu em silêncio
+
+que vc olhe pra trás e veja o quanto cresceu, e pra frente com esperança de tudo que ainda vem
+
+que a vida te abrace como vc merece, com doçura, com verdade, com cuidado
+
+que vc tenha coragem pra ser quem é, mesmo nos dias em que n conseguir sorrir, mesmo quando tudo parecer difícil
+
+vc já provou que consegue, só por existir desse jeito bonito, inteiro, real
+
+e se em algum momento o mundo te fizer esquecer o quanto é especial, volta aqui, fecha os olhos, respira fundo, e lembra que alguém aqui acredita em vc
+
+eu tô aqui, torcendo, mesmo em silêncio, mesmo distante
+
+feliz novo ciclo, feliz tudo que vai nascer a partir de agora
+
+com carinho
+
+jediael
+</div>
+
+<div id="videoContainer" class="hidden">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ei2-RjJDBHc?autoplay=1"
+        title="Parabéns da Galinha Pintadinha" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+<script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.02;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255,105,180,0.7)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particlesArray = [];
+        for (let i = 0; i < 200; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    document.getElementById('surpresaBtn').addEventListener('click', () => {
+        document.getElementById('videoContainer').classList.remove('hidden');
+    });
+</script>
+</body>
+</html>
