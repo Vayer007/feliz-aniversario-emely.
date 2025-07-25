@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Planeta Emely</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #000000 0%, #1a1a1a 100%);
+        }
+        canvas {
+            display: block;
+        }
+        #emoji {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 5rem;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div id="emoji">😈</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);const particles = new THREE.Group();
+const loader = new THREE.FontLoader();
+loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+    for (let i = 0; i < 800; i++) {
+        const textGeo = new THREE.TextGeometry("Emely", {
+            font: font,
+            size: 0.2,
+            height: 0.02
+        });
+        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff69b4 });
+        const textMesh = new THREE.Mesh(textGeo, textMaterial);
+
+        const phi = Math.acos(2 * Math.random() - 1);
+        const theta = 2 * Math.PI * Math.random();
+
+        const radius = 5;
+        textMesh.position.set(
+            radius * Math.sin(phi) * Math.cos(theta),
+            radius * Math.sin(phi) * Math.sin(theta),
+            radius * Math.cos(phi)
+        );
+
+        textMesh.lookAt(0, 0, 0);
+        particles.add(textMesh);
+    }
+    scene.add(particles);
+});
+
+camera.position.z = 10;
+
+function animate() {
+    requestAnimationFrame(animate);
+    particles.rotation.y += 0.002;
+    renderer.render(scene, camera);
+}
+animate();
+
+// Emoji effect ao toque
+window.addEventListener('click', () => {
+    const emoji = document.getElementById('emoji');
+    emoji.style.transform = 'translate(-50%, -50%) scale(1)';
+    setTimeout(() => {
+        emoji.style.transform = 'translate(-50%, -50%) scale(0)';
+    }, 1000);
+});
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+</script>
+</body>
+</html>
