@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Planeta Emely 3D</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #1a001f, #000);
+    }
+    canvas {
+      display: block;
+    }
+    #emoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 80px;
+      transition: transform 0.4s ease;
+    }
+    #emoji.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <div id="emoji">😈</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);let group = new THREE.Group();
+
+let loader = new THREE.FontLoader();
+loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
+  for (let i = 0; i < 300; i++) {
+    let textGeo = new THREE.TextGeometry("Emely", {
+      font: font,
+      size: 0.5,
+      height: 0.05,
+    });
+    let textMaterial = new THREE.MeshBasicMaterial({ color: 0xaa88ff });
+    let mesh = new THREE.Mesh(textGeo, textMaterial);
+
+    let phi = Math.acos(-1 + (2 * i) / 300);
+    let theta = Math.sqrt(300 * Math.PI) * phi;
+
+    mesh.position.x = 10 * Math.cos(theta) * Math.sin(phi);
+    mesh.position.y = 10 * Math.sin(theta) * Math.sin(phi);
+    mesh.position.z = 10 * Math.cos(phi);
+
+    mesh.rotation.y = Math.random() * Math.PI;
+    group.add(mesh);
+  }
+  scene.add(group);
+});
+
+camera.position.z = 20;
+
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (event) => {
+  mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  group.rotation.y += 0.001;
+  group.rotation.x += 0.0005;
+  renderer.render(scene, camera);
+}
+animate();
+
+// Emoji ao clicar na tela
+document.body.addEventListener('click', () => {
+  const emoji = document.getElementById('emoji');
+  emoji.classList.add('show');
+  setTimeout(() => emoji.classList.remove('show'), 1500);
+});
+
+// Responsivo
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+  </script>
+</body>
+</html>
